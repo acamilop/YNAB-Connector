@@ -7,6 +7,7 @@ requires-python = ">=3.11"
 license = { file = "LICENSE" }
 authors = [
     { name = "Rafael Garcia" },
+    { name = "acamilop" },
 ]
 keywords = ["mcp", "model-context-protocol", "ynab"]
 classifiers = [
@@ -24,9 +25,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/rgarcia/ynab-mcp-server"
-Repository = "https://github.com/rgarcia/ynab-mcp-server"
-Issues = "https://github.com/rgarcia/ynab-mcp-server/issues"
+Homepage = "https://github.com/acamilop/YNAB-Connector"
+Repository = "https://github.com/acamilop/YNAB-Connector"
+Issues = "https://github.com/acamilop/YNAB-Connector/issues"
+Upstream = "https://github.com/rgarcia/ynab-mcp-server"
 
 [project.scripts]
 ynab-mcp-tools = "ynab_mcp_server.server:main"

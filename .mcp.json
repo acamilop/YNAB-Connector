@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "ynab": {
+      "command": "${USERPROFILE}/.local/bin/uv.exe",
+      "args": ["run", "--directory", "${USERPROFILE}/git/YNAB-Connector", "ynab-mcp-server"],
+      "env": {
+        "YNAB_API_TOKEN": "${YNAB_API_TOKEN}"
+      }
+    }
+  }
+}

@@ -1,3 +1,22 @@
+# YNAB Connector
+
+Personal fork of [rgarcia/ynab-mcp-server](https://github.com/rgarcia/ynab-mcp-server). It runs from this checkout instead of the published `ynab-mcp-tools` package, so local changes (such as multi-currency import tools) take effect without publishing.
+
+### Running this fork with Claude Code
+
+1. Clone to `%USERPROFILE%\git\YNAB-Connector` and install [uv](https://docs.astral.sh/uv/) to `%USERPROFILE%\.local\bin`.
+2. Store your YNAB token as a user environment variable (never commit it):
+
+   ```powershell
+   [Environment]::SetEnvironmentVariable('YNAB_API_TOKEN','your-token-here','User')
+   ```
+
+3. Restart Claude and open this folder. The project's `.mcp.json` registers the `ynab` server; approve it when prompted.
+
+The rest of this README is the upstream documentation.
+
+---
+
 # YNAB MCP Server
 
 An MCP (Model Context Protocol) server for the [YNAB (You Need A Budget)](https://www.ynab.com/) API, built with [FastMCP](https://gofastmcp.com/).
