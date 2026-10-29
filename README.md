@@ -5,11 +5,7 @@ Personal fork of [rgarcia/ynab-mcp-server](https://github.com/rgarcia/ynab-mcp-s
 ### Running this fork with Claude Code
 
 1. Clone to `%USERPROFILE%\git\YNAB-Connector` and install [uv](https://docs.astral.sh/uv/) to `%USERPROFILE%\.local\bin`.
-2. Store your YNAB token as a user environment variable (never commit it):
-
-   ```powershell
-   [Environment]::SetEnvironmentVariable('YNAB_API_TOKEN','your-token-here','User')
-   ```
+2. Copy `.env.example` to `.env` and paste your YNAB token after `YNAB_API_TOKEN=`. `.env` is git-ignored; a real `YNAB_API_TOKEN` environment variable takes precedence over it.
 
 3. Restart Claude and open this folder. The project's `.mcp.json` registers the `ynab` server; approve it when prompted.
 

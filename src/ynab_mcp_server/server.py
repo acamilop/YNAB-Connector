@@ -1,6 +1,7 @@
 """YNAB MCP Server using FastMCP and OpenAPI specification."""
 
 import os
+from pathlib import Path
 
 import httpx
 import yaml
@@ -9,6 +10,7 @@ from fastmcp.server.providers.openapi import MCPType, OpenAPITool, RouteMap
 
 YNAB_API_BASE = "https://api.ynab.com/v1"
 YNAB_OPENAPI_SPEC_URL = "https://api.ynab.com/papi/open_api_spec.yaml"
+ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
 
 # Routes to exclude from the MCP server (these return too much data and bomb the context)
 EXCLUDED_ROUTES = [
@@ -26,12 +28,25 @@ def _omit_openapi_output_schemas(_route: object, component: object) -> None:
         component.output_schema = None
 
 
+def _load_env_file(path: Path = ENV_FILE) -> None:
+    """Set KEY=value pairs from the checkout's .env without overriding the real environment."""
+    if not path.is_file():
+        return
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
+
+
 def create_server() -> FastMCP:
     """Create and configure the YNAB MCP server from the OpenAPI spec."""
+    _load_env_file()
     token = os.environ.get("YNAB_API_TOKEN")
     if not token:
         raise ValueError(
-            "YNAB_API_TOKEN environment variable is required. "
+            f"YNAB_API_TOKEN is required. Add it to {ENV_FILE} or set it as an environment variable. "
             "Get your personal access token from https://app.ynab.com/settings/developer"
         )
 
